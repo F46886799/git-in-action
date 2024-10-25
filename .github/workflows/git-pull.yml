@@ -11,7 +11,7 @@ on:
       - '.github/workflows/git-pull.yml'
   schedule:
     # Runs at 09:30, Monday through Saturday
-    # 北京时间+8，8点30分
+    # 北京时间+8，次日8点30分
     - cron: '30 22 * * 1-6'
 jobs:
   build:
