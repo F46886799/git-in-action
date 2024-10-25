@@ -11,7 +11,7 @@ on:
     paths:   # 这里是用来指定哪个文件更改，才会触发的
       - '.github/workflows/ipo.yml'
   schedule:
-    # Runs at 01:30, 02:30, 05:30 and 06:30, Monday through Friday
+    # Runs at 10:00, Monday through Friday
     # 北京时间+8，即10点
     - cron: '0 2 * * 1-5'
 
