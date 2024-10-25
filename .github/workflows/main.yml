@@ -12,8 +12,8 @@ on:
       - '.github/workflows/main.yml'
   schedule:
     # Runs at 01:30, 02:30, 05:30 and 06:30, Monday through Friday
-    # 北京时间+8，即9点30分,10点30分
-    - cron: '0 2 * * 1-5'
+    # 北京时间+8，11点30分
+    - cron: '0 3 * * 1-5'
 
 permissions:
   contents: read
