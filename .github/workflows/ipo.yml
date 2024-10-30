@@ -47,9 +47,9 @@ jobs:
         run: |
           python ipo_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
 
-      # - name: Run Dreamlabs IPO【BJ Stock】
-      #   run: |
-      #     python ipo_bj_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+      - name: Run Dreamlabs IPO【BJ Stock】
+        run: |
+          python ipo_bj_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
 
       - name: Run Dreamlabs IPO【Convertible Bond】
         run: |
