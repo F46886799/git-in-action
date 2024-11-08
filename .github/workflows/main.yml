@@ -11,8 +11,7 @@ on:
     paths:   # 这里是用来指定哪个文件更改，才会触发的
       - '.github/workflows/main.yml'
   schedule:
-    # Runs at 01:30, 02:30, 05:30 and 06:30, Monday through Friday
-    # 北京时间+8，11点
+    # 北京时间+8，周一至周五，上午11点执行
     - cron: '0 3 * * 1-5'
 
 permissions:
