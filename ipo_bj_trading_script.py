@@ -30,4 +30,4 @@ if __name__ == "__main__":
 
     import time
     # 暂停 60 秒  
-    time.sleep(60*3) 
+    time.sleep(60) 
