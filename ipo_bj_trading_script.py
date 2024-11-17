@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     logger.info("***Step2:Download BJ Stock IPO Data")
     try:
-        requests_get('{}/current_stock_ipo'.format(base_url), headers)
+        requests_get('{}/current_stock_ipo?market_type=bj'.format(base_url), headers)
     except Exception as e:
         logger.error(f"Download BJ Stock IPO Data Error: {e}") 
     logger.info("\n")
