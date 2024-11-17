@@ -29,5 +29,5 @@ if __name__ == "__main__":
     requests_get(base_url, headers)
 
     import time
-    # 暂停 60 秒  
-    time.sleep(60) 
+    # 暂停 60*3 秒  
+    time.sleep(60*3) 
