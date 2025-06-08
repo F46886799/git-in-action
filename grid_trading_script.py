@@ -90,12 +90,40 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：海康威视")
+    logger.info("***Step3:Generate Signals：东方财富")
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
-          "backtest_config": "grid_hkws_1d",
-          "stock_abbr": "hkws",
+          "backtest_config": "grid_dfcf_1d",
+          "stock_abbr": "dfcf",
+          "strategy_name": "trend_following",
+          "grid_low": 6.25,
+          "grid_high": 10.35,
+          "grid_num": 6
+    }
+    requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
+    logger.info("\n")
+
+    logger.info("***Step3:Generate Signals：恒瑞医药")
+    signal_data = {
+          "start_date": "2023-08-21",
+          "end_date": "2030-12-31",
+          "backtest_config": "grid_hryy_1d",
+          "stock_abbr": "hryy",
+          "strategy_name": "trend_following",
+          "grid_low": 6.25,
+          "grid_high": 10.35,
+          "grid_num": 6
+    }
+    requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
+    logger.info("\n")
+
+    logger.info("***Step3:Generate Signals：苏泊尔")
+    signal_data = {
+          "start_date": "2023-08-21",
+          "end_date": "2030-12-31",
+          "backtest_config": "grid_sbe_1d",
+          "stock_abbr": "sbe",
           "strategy_name": "trend_following",
           "grid_low": 6.25,
           "grid_high": 10.35,
