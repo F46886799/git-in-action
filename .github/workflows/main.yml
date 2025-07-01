@@ -12,7 +12,7 @@ on:
       - '.github/workflows/main.yml'
   schedule:
     # 北京时间+8，周一至周五，上午9点50分执行
-    - cron: '0 1 * * 1-5'
+    - cron: '0 0 * * 1-5'
 
 permissions:
   contents: read
