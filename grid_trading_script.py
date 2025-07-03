@@ -10,7 +10,7 @@ if __name__ == "__main__":
     requests_get('http://dreamtown.synology.me:5181', headers)
     logger.info("\n")
 
-    logger.info("***Step2:Download Data")
+    logger.info("***Step2:Download Data,{}".format(get_current_time()))
     download_data = {
         "start_date": "2023-08-21",
         "end_date": "2030-12-31",
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/data', headers, download_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：艾融软件")
+    logger.info("***Step3:Generate Signals：艾融软件,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：长江电力")
+    logger.info("***Step3:Generate Signals：长江电力,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：招商银行")
+    logger.info("***Step3:Generate Signals：招商银行,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：美的集团")
+    logger.info("***Step3:Generate Signals：美的集团,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：软通动力")
+    logger.info("***Step3:Generate Signals：软通动力,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：东方财富")
+    logger.info("***Step3:Generate Signals：东方财富,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：恒瑞医药")
+    logger.info("***Step3:Generate Signals：恒瑞医药,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
 
-    logger.info("***Step3:Generate Signals：苏泊尔")
+    logger.info("***Step3:Generate Signals：苏泊尔,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -134,3 +134,4 @@ if __name__ == "__main__":
 
     logger.info("***Step4:Hello World Again,{}".format(get_current_time()))
     requests_get('http://dreamtown.synology.me:5181', headers)
+    logger.info("\n")
