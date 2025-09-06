@@ -1,4 +1,4 @@
-name: Dreamlabs Automation
+name: Dreamlabs Grid
 # makes little sense, spell-checker: disable
 on:
   workflow_dispatch:
