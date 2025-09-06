@@ -19,7 +19,8 @@ if __name__ == "__main__":
         "start_date": "2023-08-21",
         "end_date": "2030-12-31",
         "source": "akshare_stock",
-        "freq": "1d"
+        "freq": "1d",
+        "market_type": "HK"
     }
     requests_post('http://dreamtown.synology.me:5184/grid/data', headers, download_data)
     logger.info("\n")
