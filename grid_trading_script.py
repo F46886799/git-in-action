@@ -20,6 +20,7 @@ if __name__ == "__main__":
         "end_date": "2030-12-31",
         "source": "akshare_stock",
         "freq": "1d",
+        "refresh_all": False,
         "market_type": "ZH"
     }
     requests_post('http://dreamtown.synology.me:5181/grid/data', headers, download_data)
