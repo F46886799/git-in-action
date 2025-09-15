@@ -6,12 +6,12 @@ from BarkNotificator import BarkNotificator
 from pypushdeer import PushDeer
 
 
-def bark_push（title="welcome", content="hello world"）：
+def bark_push(title="welcome", content="hello world"）：
     bark = BarkNotificator(device_token="your device token")
     bark.send(title=title, content=content)
 
 
-def pushdeer_push（title="# hello world", content="**optional** description in markdown"）：
+def pushdeer_push(title="# hello world", content="**optional** description in markdown"）：
     pushdeer = PushDeer(pushkey="your_push_key")
     pushdeer.send_markdown(title, desp=content)
 
