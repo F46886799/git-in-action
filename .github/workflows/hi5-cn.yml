@@ -12,7 +12,7 @@ on:
       - '.github/workflows/hi5-cn.yml'
   schedule:
     # 北京时间+8，周一至周五，计划上午10点执行，实际是上午10点50分左右执行
-    - cron: '0 3 * * 1-5'
+    - cron: '5 3 * * 1-5'
 
 permissions:
   contents: read
