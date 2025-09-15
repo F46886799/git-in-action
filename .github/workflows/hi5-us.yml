@@ -1,4 +1,4 @@
-name: Dreamlabs A-Share IPO
+name: Dreamlabs Hi5 US
 # makes little sense, spell-checker: disable
 on:
   workflow_dispatch:
@@ -9,10 +9,10 @@ on:
     branches:
       - develop
     paths:   # 这里是用来指定哪个文件更改，才会触发的
-      - '.github/workflows/ipo.yml'
+      - '.github/workflows/hi5-us.yml'
   schedule:
     # 北京时间+8，周一至周五，计划上午10点执行，实际是上午10点50分左右执行
-    - cron: '0 2 * * 1-5'
+    - cron: '0 3 * * 1-5'
 
 permissions:
   contents: read
@@ -42,18 +42,10 @@ jobs:
           sudo apt-get update
           python -m pip install --no-python-version-warning --disable-pip-version-check -r requirements.txt
 
-      - name: Run Dreamlabs IPO【Stock】
+      - name: Run Dreamlabs Hi5 US
         run: |
-          python ipo_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
-
-      - name: Run Dreamlabs IPO【BJ Stock】
-        run: |
-          python ipo_bj_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
-
-      - name: Run Dreamlabs IPO【Convertible Bond】
-        run: |
-          python ipo_cb_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
-
-      - name: Dreamlabs IPO End
+          python hi5_us_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+      
+      - name: Dreamlabs Hi5 US End
         run: |
           python hello_world_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
