@@ -1,0 +1,59 @@
+name: Dreamlabs A-Share IPO
+# makes little sense, spell-checker: disable
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+    paths:   # 这里是用来指定哪个文件更改，才会触发的
+      - '.github/workflows/ipo.yml'
+  schedule:
+    # 北京时间+8，周一至周五，计划上午10点执行，实际是上午10点50分左右执行
+    - cron: '0 2 * * 1-5'
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python_version:
+            - '3.9'
+    name: Ubuntu Python ${{ matrix.python_version }}
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Use Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache: 'pip' # caching pip dependencies
+
+      - name: 🧳 Install Dreamlabs and dependencies
+        run: |
+          sudo apt-get update
+          python -m pip install --no-python-version-warning --disable-pip-version-check -r requirements.txt
+
+      - name: Run Dreamlabs IPO【Stock】
+        run: |
+          python ipo_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+
+      - name: Run Dreamlabs IPO【BJ Stock】
+        run: |
+          python ipo_bj_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+
+      - name: Run Dreamlabs IPO【Convertible Bond】
+        run: |
+          python ipo_cb_trading_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+
+      - name: Dreamlabs IPO End
+        run: |
+          python hello_world_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
