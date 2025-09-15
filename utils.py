@@ -2,7 +2,16 @@ from datetime import datetime as dt
 from pytz import timezone
 import requests
 from loguru import logger
+from BarkNotificator import BarkNotificator
 
+
+def bark_push（title="welcome", content="hello world"）：
+    bark = BarkNotificator(device_token="your device token")
+    bark.send(title=title, content=content)
+
+def pushdeer_push（title="welcome", content="hello world"）：
+    bark = BarkNotificator(device_token="your device token")
+    bark.send(title=title, content=content)
 
 def get_current_time(tz: str = "Asia/Shanghai", time_format: str = "%Y-%m-%d %H:%M:%S"):
     current_time = dt.now(timezone(tz)).strftime(time_format)
