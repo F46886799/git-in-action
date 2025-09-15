@@ -12,7 +12,7 @@ def bark_push(title="welcome", content="hello world"）：
 
 
 def pushdeer_push(title="# hello world", content="**optional** description in markdown"）：
-    pushdeer = PushDeer(pushkey="your_push_key")
+    pushdeer = PushDeer(pushkey="PDU21717TuwqG9EyGgLXfSEmNGcpQbj0gSqWEXvL8")
     pushdeer.send_markdown(title, desp=content)
 
 
