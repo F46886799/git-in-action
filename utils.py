@@ -7,7 +7,7 @@ from pypushdeer import PushDeer
 
 
 def bark_push(title="welcome", content="hello world"）：
-    bark = BarkNotificator(device_token="your device token")
+    bark = BarkNotificator(device_token="b4940a7bea9fa620ff521d9c31162125f0e0e07601b97cb5af6ac6de453511d7")
     bark.send(title=title, content=content)
 
 
