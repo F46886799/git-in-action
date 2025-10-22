@@ -1,4 +1,4 @@
-name: Dreamlabs Hi5 CN
+name: Dreamlabs Permanent Portfolio
 # makes little sense, spell-checker: disable
 on:
   workflow_dispatch:
