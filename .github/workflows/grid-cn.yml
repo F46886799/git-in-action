@@ -1,4 +1,4 @@
-name: Dreamlabs Grid
+name: Dreamlabs Grid CN
 # makes little sense, spell-checker: disable
 on:
   workflow_dispatch:
