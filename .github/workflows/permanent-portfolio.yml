@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Dreamlabs Permanent Portfolio
         run: |
-          python permanent-portfolio_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+          python permanent_portfolio_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
       
       - name: Dreamlabs Hi5 CN End
         run: |
