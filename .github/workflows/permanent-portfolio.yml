@@ -9,7 +9,7 @@ on:
     branches:
       - develop
     paths:   # 这里是用来指定哪个文件更改，才会触发的
-      - '.github/workflows/hi5-cn.yml'
+      - '.github/workflows/permanent-portfolio.yml'
   schedule:
     # 北京时间+8，周一至周五，计划上午10点执行，实际是上午10点50分左右执行
     - cron: '5 3 * * 1-5'
@@ -42,9 +42,9 @@ jobs:
           sudo apt-get update
           python -m pip install --no-python-version-warning --disable-pip-version-check -r requirements.txt
 
-      - name: Run Dreamlabs Hi5 CN
+      - name: Run Dreamlabs Permanent Portfolio
         run: |
-          python hi5_cn_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
+          python permanent-portfolio_script.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
       
       - name: Dreamlabs Hi5 CN End
         run: |
