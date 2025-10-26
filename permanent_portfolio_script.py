@@ -9,7 +9,7 @@ if __name__ == "__main__":
                                               "https://docs.google.com/spreadsheets/d/1Jk7GYXWLAHBjsXZtUMuBtmpE3EWdIDviGOPWKb8hnJs/edit?gid=1843166815#gid=1843166815")
     
     logger.info("***Step1:Bark推送,{}".format(get_current_time()))
-    bark_push(title="【永久组合全球】【王慧玲的汇丰中国】",content=content_txt)
+    bark_push(title="【永久组合全球】【王慧玲的汇丰中国】",content=content_txt,category="永久组合全球")
     
     time.sleep(1)
     
