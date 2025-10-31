@@ -13,15 +13,15 @@ def target_crash(ticker="RSP.US"):
         logger.debug(data)
     else:
         logger.debug("Get data failed.")
-        retrun False
+        return False
 
     change_p = data["change_p"]
     if change_p < -1.0:
         logger.debug("RSP.US的跌幅大于1%")
-        retrun True
+        return True
     else:
         logger.debug("RSP.US的跌幅小于1%")
-        retrun False
+        return False
 
 
 def bark_push(title="welcome", content="hello world", category=None):
