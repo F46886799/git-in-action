@@ -6,6 +6,24 @@ from BarkNotificator import BarkNotificator
 from pypushdeer import PushDeer
 
 
+def rsp_crash():
+    response = requests.get("https://eodhd.com/api/real-time/RSP.US?api_token=69042d75473ad0.16653704&fmt=json")
+    if response.status_code == 200:
+        data = response.json()
+        logger.debug(data)
+    else:
+        logger.debug("Get data failed.")
+        retrun False
+
+    change_p = data["change_p"]
+    if change_p < -1.0:
+        logger.debug("RSP.US的跌幅大于1%")
+        retrun True
+    else:
+        logger.debug("RSP.US的跌幅小于1%")
+        retrun False
+
+
 def bark_push(title="welcome", content="hello world", category=None):
     bark = BarkNotificator(device_token="b4940a7bea9fa620ff521d9c31162125f0e0e07601b97cb5af6ac6de453511d7")
     bark.send(title=title, content=content,category=category)
