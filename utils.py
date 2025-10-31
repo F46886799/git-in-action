@@ -6,8 +6,8 @@ from BarkNotificator import BarkNotificator
 from pypushdeer import PushDeer
 
 
-def rsp_crash():
-    response = requests.get("https://eodhd.com/api/real-time/RSP.US?api_token=69042d75473ad0.16653704&fmt=json")
+def target_crash(ticker="RSP.US"):
+    response = requests.get("https://eodhd.com/api/real-time/{}?api_token=69042d75473ad0.16653704&fmt=json".format(ticker))
     if response.status_code == 200:
         data = response.json()
         logger.debug(data)
