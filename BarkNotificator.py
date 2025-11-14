@@ -90,6 +90,7 @@ class BarkNotificator:
             message["url"] = target_url
         if category is not None:
             message["aps"]["category"] = category
+            message["group"] = category
         if icon_url is not None:
             message["icon"] = icon_url
         with httpx.Client(http2=True) as client:
