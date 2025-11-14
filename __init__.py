@@ -1,1 +1,0 @@
-from .barknotificator import BarkNotificator
