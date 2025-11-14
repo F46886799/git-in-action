@@ -2,7 +2,4 @@ requests
 loguru
 pytz
 pypushdeer
-# barknotificator
-httpx[http2]
-pyjwt
-cryptography
+barknotificator
