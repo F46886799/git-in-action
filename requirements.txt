@@ -2,4 +2,4 @@ requests
 loguru
 pytz
 pypushdeer
-barknotificator
+barknotificator-fixed==0.1.1
