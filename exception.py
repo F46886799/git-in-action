@@ -1,2 +1,0 @@
-class BarkNotificatorException(Exception):
-    pass
