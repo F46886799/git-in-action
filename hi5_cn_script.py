@@ -11,7 +11,7 @@ if __name__ == "__main__":
     logger.info("***Step1:Bark推送,{}".format(get_current_time()))
     # bark_push(title="【全天候组合A股】【张甫的国君普通】",content=content_txt,category="全天候组合A股")
     bark_push_v2(title="【全天候组合A股】【张甫的国君普通】",body=content_txt, group="全天候组合A股",
-                 icon="https://00.ifreesite.com/world-i/china_flag.png",
+                 icon="https://00.ifreesite.com/world-i/chian_national_emblem.png",
                  url="https://docs.google.com/spreadsheets/d/1G1E0qtLzt1WulfUk2uSxXrm_HNKejTMwwI-4KF3OG9w/edit?gid=0#gid=0")
     
     time.sleep(1)
