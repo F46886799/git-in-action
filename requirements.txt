@@ -2,4 +2,4 @@ requests
 loguru
 pytz
 pypushdeer
-barknotificator
+# barknotificator
