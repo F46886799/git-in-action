@@ -281,7 +281,7 @@ if __name__ == "__main__":
           "grid_high": 10.35,
           "grid_num": 6
     }
-    requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
+    # requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
     logger.info("\n")
     
     logger.info("***Step4:Hello World Again,{}".format(get_current_time()))
