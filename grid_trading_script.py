@@ -18,9 +18,9 @@ if __name__ == "__main__":
     download_data = {
         "start_date": "2023-08-21",
         "end_date": "2030-12-31",
-        "source": "akshare_stock",
+        "source": "zhitu_stock",
         "freq": "1d",
-        "refresh_all": False,
+        "refresh_all": True,
         "market_type": "ZH"
     }
     requests_post('http://dreamtown.synology.me:5181/grid/data', headers, download_data)
