@@ -270,7 +270,7 @@ if __name__ == "__main__":
     
     time.sleep(3)
 
-    logger.info("***Step3:Generate Signals：艾融软件,{}".format(get_current_time()))
+    # logger.info("***Step3:Generate Signals：艾融软件,{}".format(get_current_time()))
     signal_data = {
           "start_date": "2023-08-21",
           "end_date": "2030-12-31",
@@ -282,7 +282,7 @@ if __name__ == "__main__":
           "grid_num": 6
     }
     # requests_post('http://dreamtown.synology.me:5181/grid/signals', headers, signal_data)
-    logger.info("\n")
+    # logger.info("\n")
     
     logger.info("***Step4:Hello World Again,{}".format(get_current_time()))
     requests_get('http://dreamtown.synology.me:5181', headers)
