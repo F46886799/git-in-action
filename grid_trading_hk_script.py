@@ -16,9 +16,9 @@ if __name__ == "__main__":
 
     logger.info("***Step2:Download Data,{}".format(get_current_time()))
     download_data = {
-        "start_date": "2023-08-21",
+        "start_date": "2024-11-25",
         "end_date": "2030-12-31",
-        "source": "akshare_stock",
+        "source": "itick_stock",
         "freq": "1d",
         "refresh_all": False,
         "market_type": "HK"
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     logger.info("***Step3:Generate Signals：腾讯控股,{}".format(get_current_time()))
     signal_data = {
-          "start_date": "2023-08-21",
+          "start_date": "2024-11-25",
           "end_date": "2030-12-31",
           "backtest_config": "grid_tencent_1d",
           "stock_abbr": "tencent",
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     logger.info("***Step3:Generate Signals：小米集团,{}".format(get_current_time()))
     signal_data = {
-          "start_date": "2023-08-21",
+          "start_date": "2024-11-25",
           "end_date": "2030-12-31",
           "backtest_config": "grid_xiaomi_1d",
           "stock_abbr": "xiaomi",
