@@ -1,1 +1,48 @@
+name: OP Daily Bot
+# makes little sense, spell-checker: disable
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+    paths:   # 这里是用来指定哪个文件更改，才会触发的
+      - '.github/workflows/op_daily_bot.yml'
+  schedule:
+    # 北京时间+9，周一至周五，上午9点35分左右执行
+    # - cron: "分 时 日 月 周"
+    - cron: '5 0 * * 1-5'
 
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python_version:
+            - '3.9'
+    name: Ubuntu Python ${{ matrix.python_version }}
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Use Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache: 'pip' # caching pip dependencies
+
+      - name: 🧳 Install dependencies
+        run: |
+          sudo apt-get update
+          python -m pip install --no-python-version-warning --disable-pip-version-check -r requirements.txt
+
+      - name: Run Daily Bot
+        run: |
+          python op_daily_bot_v2.py --no-other-python --skip-reflection-test --skip-all-cpython-tests --assume-yes-for-downloads
