@@ -184,8 +184,12 @@ def main():
 
             # 初始化
             send_work_weixin_markdown_msg(WEIXIN_YUANGONG_URL,final_report)
-
-            #send_work_weixin_markdown_msg(WEIXIN_YUANGONG_URL,final_report)
+            # 迟到提醒HRBP
+            send_work_weixin_msg(WEIXIN_YUANGONG_URL,daily_checkin_msg)
+            # 积压任务提醒所有
+            send_work_weixin_msg(WEIXIN_YUANGONG_URL,all_msg)
+            # 积压任务提醒所有
+            # send_work_weixin_msg(WEIXIN_YUANGONG_URL,template_card_msg)
             
         except KeyError as e:
             print(f"数据解析错误，模版中缺少对应的字段数据: {e}")
@@ -204,6 +208,73 @@ def send_work_weixin_markdown_msg(webhook, msg):
     if res["errcode"] != 0:
         print(f"发送企业微信群markdown消息失败：{res['errmsg']}")
     print(f"发送企业微信群markdown消息成功")
+
+# "15201136765" 王洪涛
+# "18516995417" 王跃山
+# "15266263350" 张雪莹
+# "18611331816" 蒋洁
+
+template_card_msg = {
+    "msgtype":"template_card",
+    "template_card":{
+        "card_type":"text_notice",
+        "source":{
+            "icon_url":"https://wework.qpic.cn/wwpic/252813_jOfDHtcISzuodLa_1629280209/0",
+            "desc":"企业微信",
+            "desc_color":0
+        },
+        "main_title":{
+            "title":"欢迎使用企业微信",
+            "desc":"您的好友正在邀请您加入企业微信"
+        },
+        "emphasis_content":{
+            "title":"100",
+            "desc":"数据含义"
+        },
+        
+        "sub_title_text":"下载企业微信还能抢红包！",
+        "horizontal_content_list":[
+            {
+                "keyname":"邀请人",
+                "value":"张三"
+            },
+            {
+                "keyname":"企微官网",
+                "value":"点击访问",
+                "type":1,
+                "url":"https://work.weixin.qq.com/?from=openApi"
+            },
+            {
+                "keyname":"企微下载",
+                "value":"企业微信.apk",
+                "type":2,
+                "media_id":"MEDIAID"
+            }
+        ]
+    }
+}
+
+daily_checkin_msg = {
+        "msgtype": "text",
+        "text": {
+            "content": "请跟进运营早报中的迟到情况，并于当日上午10点15分前反馈具体原因。",
+            "mentioned_mobile_list":["15201136765","@all"]
+        }
+    }
+
+all_msg = {
+        "msgtype": "text",
+        "text": {
+            "content": "请各位关注运营早报中的理积压任务，周五下班前完成积压任务处理。",
+            "mentioned_mobile_list":["18516995417","@all"]
+        }
+    }
+
+def send_work_weixin_msg(webhook, msg):
+    res = requests.post(webhook, json=msg).json()
+    if res["errcode"] != 0:
+        print(f"发送企业微信群文本消息失败：{res['errmsg']}")
+    print(f"发送企业微信群文本消息成功")
 
 if __name__ == "__main__":
     main()
