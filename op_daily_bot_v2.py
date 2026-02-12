@@ -33,17 +33,20 @@ REPORT_TEMPLATE_ORIG = """四中心，{date} 运营早报
 REPORT_TEMPLATE = """
 ## 四中心运营早报，{date}，{date_str}
 ### <font color="info">一、服务节点：</font>
-1. 运行中：{d41bee83a766f44158476c7a006e127d}
-<font color="warning">2. 8点半前迟到：{dcac5153426d4b7eb38a36a1094f35f0}，（人员清单：{02425d600527b781c647f14dde84b9aa}）</font>
-<font color="warning">3. 8点半~9点迟到：{a487e6c867b5ff606dab82c1c79f4ec7}，（人员清单：{be8130f258c7798bebf5dfa428f21f12}）</font>
-<font color="warning">4. 9点后迟到：{fa070fc658b879f64596348c68fead5b}，（人员清单：{a04b00a74238772e0785ce8efda36725}）</font>
-5. 待岗人数：{264ef56922629f76a107c32853621ef1}，（人员清单：{7eb8e3ba20f450353355a170431b6860}）
-6. 离职人数：{3df42d9589645c0480186ce2876c0822}，（人员清单：{928e5e3246ee01f62d8f17482a8052ac}）
-7. 待上岗人数：{a02a7a14dd328d57639e4a5953b86b74}，（人员清单：{901247dd5966f0d35ebbc3575325bb37}）
+1. 总人数：{total_count}
+2. 运行中人数：{d41bee83a766f44158476c7a006e127d}
+<font color="warning">3. 8点半前迟到：{dcac5153426d4b7eb38a36a1094f35f0}，（人员清单：{02425d600527b781c647f14dde84b9aa}）</font>
+<font color="warning">4. 8点半~9点迟到：{a487e6c867b5ff606dab82c1c79f4ec7}，（人员清单：{be8130f258c7798bebf5dfa428f21f12}）</font>
+<font color="warning">5. 9点后迟到：{fa070fc658b879f64596348c68fead5b}，（人员清单：{a04b00a74238772e0785ce8efda36725}）</font>
+6. 待岗中人数：{264ef56922629f76a107c32853621ef1}，（人员清单：{7eb8e3ba20f450353355a170431b6860}）
+7. 离职中人数：{3df42d9589645c0480186ce2876c0822}，（人员清单：{928e5e3246ee01f62d8f17482a8052ac}）
+8. 待上岗人数：{a02a7a14dd328d57639e4a5953b86b74}，（人员清单：{901247dd5966f0d35ebbc3575325bb37}）
 ### <font color="info">二、订单指标：</font>
 1. 进行中需求订单：{ordersDetail_ordersNum}
 2. 进行中招聘订单：{ordersDetail_jobNum}
-### <font color="warning">三、积压任务：</font>
+3. 有简历招聘订单：{ordersDetail_hasResumeNum}
+4. 无简历招聘订单：{ordersDetail_nullResumeNum}
+### <font color="info">三、积压任务：</font>
 <font color="warning">1. 超10天积压任务数：{statFlowData_count}</font>
 <font color="warning">2. 超10天积压任务明细：{statFlowData_fd_str}</font>
 """
@@ -107,6 +110,7 @@ def parse_and_map_data(json_data):
     # --- 关键修改区域 END ---
 
     # 服务状态
+    total_count = 0
     all_srvcStatus = json_data.get("srvcStatus")
     for srvcStatus in all_srvcStatus:
         item_srvcStatus_name = srvcStatus.get("srvcStatus","状态未明")
@@ -117,6 +121,8 @@ def parse_and_map_data(json_data):
         mapping[md5_string(item_srvcStatus_name+"_empName")] = item_srvcStatus_empName
         mapping[md5_string(item_srvcStatus_name+"_count")] = item_srvcStatus_count
         mapping[md5_string(item_srvcStatus_name+"_operDeptName")] = item_srvcStatus_operDeptName
+        total_count +=item_srvcStatus_count
+    mapping["total_count"] = total_count
 
     if md5_string("[A]中断(无签到/无请假/未审批/非退场/8点半前)_count") not in mapping:
         mapping[md5_string("[A]中断(无签到/无请假/未审批/非退场/8点半前)_count")] = 0
@@ -136,7 +142,7 @@ def parse_and_map_data(json_data):
     ordersDetail_jobChgNum = json_data.get("ordersDetail").get("jobChgNum",0)
     mapping["ordersDetail_jobChgNum"] = ordersDetail_jobChgNum
     ordersDetail_hasResumeNum = json_data.get("ordersDetail").get("hasResumeNum",0)
-    mapping["ordersDetail_jobChgNum"] = ordersDetail_hasResumeNum
+    mapping["ordersDetail_hasResumeNum"] = ordersDetail_hasResumeNum
     ordersDetail_nullResumeNum = json_data.get("ordersDetail").get("nullResumeNum",0)
     mapping["ordersDetail_nullResumeNum"] = ordersDetail_nullResumeNum
 
@@ -163,6 +169,15 @@ def parse_and_map_data(json_data):
     return mapping
 
 def main():
+
+    tz = ZoneInfo('Asia/Shanghai')
+    today_date_str = datetime.now(tz).strftime("%Y-%m-%d")
+    is_work_day = work_day(today_date_str)
+
+    if not is_work_day:
+        print("当前日期不是工作日，直接退出...")
+        return    
+
     print("正在获取数据...")
     raw_data = get_api_data(URL)
     
@@ -275,6 +290,50 @@ def send_work_weixin_msg(webhook, msg):
     if res["errcode"] != 0:
         print(f"发送企业微信群文本消息失败：{res['errmsg']}")
     print(f"发送企业微信群文本消息成功")
+
+
+def work_day(now_date):
+
+    # 1566-节假日安排查询 - 代码参考（根据实际业务情况修改）
+
+    # 基本参数配置
+    apiUrl = 'http://apis.juhe.cn/fapig/calendar/day'  # 接口请求URL
+    apiKey = 'e06a9be9f7734f143ecdb79ddacc4c0c'  # 在个人中心->我的数据,接口名称上方查看
+
+    # 接口请求入参配置
+    requestParams = {
+        'key': apiKey,
+        'date': now_date,
+        'detail': '',
+    }
+
+    # 发起接口网络请求
+    response = requests.get(apiUrl, params=requestParams)
+
+    # 解析响应结果
+    if response.status_code == 200:
+        responseResult = response.json()
+        # 网络请求成功。可依据业务逻辑和接口文档说明自行处理。
+        print(responseResult)
+        # {
+        #     "reason": "success",
+        #     "result": {
+        #         "date": "2026-02-12",
+        #         "week": "星期四",
+        #         "statusDesc": "工作日",
+        #         "status": null
+        #     },
+        #     "error_code": 0
+        # }
+        if responseResult["result"]["statusDesc"] == '工作日':
+            return True
+        else:
+            return False
+    else:
+        # 网络异常等因素，解析结果异常。可依据业务逻辑自行处理。
+        print('请求异常')
+        return False
+    
 
 if __name__ == "__main__":
     main()
