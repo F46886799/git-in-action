@@ -51,6 +51,32 @@ REPORT_TEMPLATE = """
 <font color="warning">2. 超10天积压任务明细：{statFlowData_fd_str}</font>
 """
 
+
+Z4_REPORT_TEMPLATE = """
+## 四中心运营早报，{date}，{date_str}
+### <font color="info">一、服务节点：</font>
+1. 总人数：{total_count}
+2. 运行中人数：{d41bee83a766f44158476c7a006e127d}
+<font color="warning">3. 8点半前迟到：{dcac5153426d4b7eb38a36a1094f35f0}，（人员清单：{02425d600527b781c647f14dde84b9aa}）</font>
+<font color="warning">4. 8点半~9点迟到：{a487e6c867b5ff606dab82c1c79f4ec7}，（人员清单：{be8130f258c7798bebf5dfa428f21f12}）</font>
+<font color="warning">5. 9点后迟到：{fa070fc658b879f64596348c68fead5b}，（人员清单：{a04b00a74238772e0785ce8efda36725}）</font>
+6. 待岗中人数：{264ef56922629f76a107c32853621ef1}，（人员清单：{7eb8e3ba20f450353355a170431b6860}）
+7. 离职中人数：{3df42d9589645c0480186ce2876c0822}，（人员清单：{928e5e3246ee01f62d8f17482a8052ac}）
+8. 待上岗人数：{a02a7a14dd328d57639e4a5953b86b74}，（人员清单：{901247dd5966f0d35ebbc3575325bb37}）
+### <font color="info">二、订单指标：</font>
+1. 进行中需求订单：{ordersDetail_ordersNum}
+2. 进行中招聘订单：{ordersDetail_jobNum}
+3. 有简历招聘订单：{ordersDetail_hasResumeNum}
+4. 无简历招聘订单：{ordersDetail_nullResumeNum}
+### <font color="info">三、积压任务：</font>
+<font color="warning">1. 超10天积压任务数：{statFlowData_count}</font>
+<font color="warning">2. 超10天积压任务明细：{statFlowData_fd_str}</font>
+### <font color="info">四、周一&周四特别提醒：</font>
+1. HRBP：设置待岗、强休状态；闭环待岗、离职人员；
+2. 招聘：登记初面人员、关闭无效订单；
+3. 所有：处理待办消除积压任务。
+"""
+
 import hashlib
 
 def md5_string(text):
@@ -192,7 +218,13 @@ def main():
             context = parse_and_map_data(raw_data)
             
             # 生成报告
-            final_report = REPORT_TEMPLATE.format(**context)
+            # 获取当天的日期
+            tz = ZoneInfo('Asia/Shanghai')
+            day_index = datetime.now(tz).weekday()  
+            if day_index == 0 or day_index == 3:
+                final_report = Z4_REPORT_TEMPLATE.format(**context)
+            else:
+                final_report = REPORT_TEMPLATE.format(**context)
             
             print("--- 生成的早报内容 ---")
             print(final_report)
