@@ -1,6 +1,7 @@
 import requests
 import json
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # 配置部分
 URL = "http://bird5gw.i2soft.net/plugins/plugins/srvcStatus/qryBatchUpdStatus?operKey=2b20f5cf398c4bd0b28113c57ebcac6c"
@@ -86,9 +87,10 @@ def parse_and_map_data(json_data):
     """
     
     # 获取当天的日期
-    today_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    tz = ZoneInfo('Asia/Shanghai')
+    today_str = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
     weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
-    day_index = datetime.now().weekday()  
+    day_index = datetime.now(tz).weekday()  
     date_str = weekdays[day_index]
     
     # --- 关键修改区域 START ---
