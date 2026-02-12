@@ -5,7 +5,10 @@ from zoneinfo import ZoneInfo
 
 # 配置部分
 URL = "http://bird5gw.i2soft.net/plugins/plugins/srvcStatus/qryBatchUpdStatus?operKey=2b20f5cf398c4bd0b28113c57ebcac6c"
+# 测试URL
 # https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d0b61849-a811-419a-92b8-2c7147fc6ba7
+# 员工关系URL
+# https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=550fcfea-c715-4a6f-9e8f-5efdbad7c279
 WEIXIN_YUANGONG_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d0b61849-a811-419a-92b8-2c7147fc6ba7"
 WEIXIN_PLATFORM_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=550fcfea-c715-4a6f-9e8f-5efdbad7c279"
 # 定义报告模版
