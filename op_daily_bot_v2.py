@@ -41,6 +41,7 @@ REPORT_TEMPLATE = """
 6. 待岗中人数：{264ef56922629f76a107c32853621ef1}，（人员清单：{7eb8e3ba20f450353355a170431b6860}）
 7. 离职中人数：{3df42d9589645c0480186ce2876c0822}，（人员清单：{928e5e3246ee01f62d8f17482a8052ac}）
 8. 待上岗人数：{a02a7a14dd328d57639e4a5953b86b74}，（人员清单：{901247dd5966f0d35ebbc3575325bb37}）
+9. 请假情况：请假已审批，{fdffc1fe4a2af6932348e3cd5fbd2d7b}，请假未审批，{6d56d7d385b48ef7cbbdd5ca254f7dff}，产假，{f8c272af52e7b3c915ceeb415582b3e8}
 ### <font color="info">二、订单指标：</font>
 1. 进行中需求订单：{ordersDetail_ordersNum}
 2. 进行中招聘订单：{ordersDetail_jobNum}
@@ -63,6 +64,7 @@ Z4_REPORT_TEMPLATE = """
 6. 待岗中人数：{264ef56922629f76a107c32853621ef1}，（人员清单：{7eb8e3ba20f450353355a170431b6860}）
 7. 离职中人数：{3df42d9589645c0480186ce2876c0822}，（人员清单：{928e5e3246ee01f62d8f17482a8052ac}）
 8. 待上岗人数：{a02a7a14dd328d57639e4a5953b86b74}，（人员清单：{901247dd5966f0d35ebbc3575325bb37}）
+9. 请假情况：请假已审批，{fdffc1fe4a2af6932348e3cd5fbd2d7b}，请假未审批，{6d56d7d385b48ef7cbbdd5ca254f7dff}，产假，{f8c272af52e7b3c915ceeb415582b3e8}
 ### <font color="info">二、订单指标：</font>
 1. 进行中需求订单：{ordersDetail_ordersNum}
 2. 进行中招聘订单：{ordersDetail_jobNum}
@@ -183,10 +185,11 @@ def parse_and_map_data(json_data):
 
     statFlowData_fd_str = ""
     for statFlowData_fd in statFlowData_flowDetail:
-        statFlowData_fd_str += "【" + statFlowData_fd["flowName"] + ","
-        statFlowData_fd_str += statFlowData_fd["dscr"] + ","
-        statFlowData_fd_str += statFlowData_fd["dealerName"] + ","
-        statFlowData_fd_str += str(statFlowData_fd["duration"]) + "】"
+        statFlowData_fd_str += "\n"
+        statFlowData_fd_str +="【经办人：" + statFlowData_fd["dealerName"] + "，积压天数："
+        statFlowData_fd_str += str(statFlowData_fd["duration"]) + "，"
+        statFlowData_fd_str += statFlowData_fd["flowName"] + "，"
+        statFlowData_fd_str += statFlowData_fd["dscr"] + "】"
     mapping["statFlowData_fd_str"] = statFlowData_fd_str
 
     statFlowData_count = json_data.get("statFlowData").get("count",0) 
@@ -369,3 +372,6 @@ def work_day(now_date):
 
 if __name__ == "__main__":
     main()
+    # md5_string("[A]中断(有请假/已审批)_count")
+    # md5_string("[A]中断(无签到/有请假/未审批)_count")
+    # md5_string("[A]中断(产假/已审批)_count")
